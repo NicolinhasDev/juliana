@@ -1,417 +1,826 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Juliana ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5a9c3" />
+  <title>Para Juliana 🤍🌼</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff5ee4, #fad0c4);
-            overflow-x: hidden;
-            overflow-y: auto;
-            color: #333
-        }
+  <style>
+    :root {
+      --pink-50: #fff7fb;
+      --pink-100: #ffeaf3;
+      --pink-200: #ffd5e5;
+      --pink-300: #f8b9cf;
+      --pink-400: #ef91b5;
+      --pink-500: #e66b9a;
+      --pink-600: #cb4e7d;
+      --rose: #a93f68;
+      --ink: #4f3440;
+      --muted: #836673;
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(142, 66, 96, 0.18);
+    }
 
-        .screen {
-            display: none;
-            height: 100vh;
-            justify-content: center;
-            align-items: center;
-            padding: 20px
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .active {
-            display: flex
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .card {
-            background: #fff;
-            width: min(900px, 95vw);
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
-            text-align: center
-        }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 16%, rgba(255, 255, 255, 0.92) 0 2px, transparent 3px),
+        radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.82) 0 2px, transparent 3px),
+        linear-gradient(145deg, #fff3f8 0%, #f9bfd3 48%, #f3a7c2 100%);
+      background-size: 70px 70px, 95px 95px, cover;
+    }
 
-        button {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            margin: 10px
-        }
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .32;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-        .primary {
-            background: #ff5ee4;
-            color: white
-        }
+    body::before {
+      top: -150px;
+      left: -120px;
+      background: #fff;
+    }
 
-        .noBtn {
-            background: #555;
-            color: white;
-            position: fixed
-        }
+    body::after {
+      right: -140px;
+      bottom: -160px;
+      background: #d94f88;
+    }
 
-        #letter{
-            height:100vh;
-            overflow-y:auto;
-            display:none;
-            align-items:center;
-            padding:30px 0;
-        }
+    button {
+      font: inherit;
+    }
 
-        #letter .card{
-            margin:30px 0;
-            max-height:85vh;
-            overflow-y:auto;
-        }
+    .screen {
+      display: none;
+      min-height: 100svh;
+      padding: 28px 18px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-        #letter.active{
-            display:flex;
-        }
+    .screen.active {
+      display: flex;
+      animation: screenIn .55s ease both;
+    }
 
-        #typing {
-            white-space: pre-line;
-            text-align: left;
-            line-height: 1.8
-        }
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(12px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-        .heart {
-            position: fixed;
-            top: -20px;
-            pointer-events: none;
-            animation: fall linear forwards
-        }
+    .card {
+      position: relative;
+      width: min(760px, 94vw);
+      padding: clamp(28px, 5vw, 54px);
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, .91);
+      box-shadow: var(--shadow);
+      text-align: center;
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
 
-        @keyframes fall {
-            to {
-                transform: translateY(110vh)
-            }
-        }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,.65), transparent 42%);
+    }
 
-        #counterBox {
-            background: #fff0f5;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 20px
-        }
+    .content {
+      position: relative;
+      z-index: 2;
+    }
 
-        .heart-burst {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            user-select: none;
-        }
+    .eyebrow {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--pink-100);
+      color: var(--rose);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
 
-        @keyframes drop {
-            to {
-                transform: translateY(110vh) rotate(720deg)
-            }
-        }
+    h1,
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #7d3151;
+      line-height: 1.08;
+    }
 
-        img {
-            max-width: 300px;
-            border-radius: 16px;
-            margin-top: 20px
-        }
-    </style>
+    h1 {
+      font-size: clamp(2.1rem, 7vw, 4.2rem);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 5vw, 2.7rem);
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      max-width: 580px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.8vw, 1.15rem);
+      line-height: 1.72;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn {
+      min-width: 138px;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid rgba(203, 78, 125, .25);
+      outline-offset: 4px;
+    }
+
+    .primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+      box-shadow: 0 12px 26px rgba(203, 78, 125, .28);
+    }
+
+    .primary:hover {
+      box-shadow: 0 16px 30px rgba(203, 78, 125, .34);
+      filter: saturate(1.07);
+    }
+
+    .secondary {
+      color: #765262;
+      background: #f5e9ee;
+      box-shadow: inset 0 0 0 1px #ecd7e0;
+    }
+
+    .noBtn {
+      position: relative;
+    }
+
+    .noBtn.is-running {
+      position: absolute;
+      z-index: 50;
+    }
+
+    .daisy-corner {
+      position: absolute;
+      z-index: 1;
+      font-size: clamp(2.4rem, 8vw, 4.5rem);
+      filter: drop-shadow(0 8px 12px rgba(96, 62, 74, .12));
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .daisy-corner.one {
+      top: 18px;
+      right: 22px;
+      transform: rotate(13deg);
+    }
+
+    .daisy-corner.two {
+      left: 10px;
+      bottom: 6px;
+      transform: rotate(-16deg) scale(.85);
+    }
+
+    .ecg {
+      width: min(360px, 82%);
+      margin: 2px auto 24px;
+      opacity: .82;
+    }
+
+    .ecg path {
+      fill: none;
+      stroke: var(--pink-500);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: drawEcg 2.4s ease forwards;
+    }
+
+    @keyframes drawEcg {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .mini-note {
+      margin-top: 18px;
+      color: #9c7a89;
+      font-size: .88rem;
+    }
+
+    /* Carta */
+    #letter {
+      align-items: flex-start;
+      overflow-y: auto;
+      padding-top: 34px;
+      padding-bottom: 34px;
+    }
+
+    #letter .card {
+      width: min(820px, 94vw);
+      padding-top: clamp(84px, 12vw, 104px);
+      text-align: left;
+    }
+
+    /* Reserva espaço para a flor, sem sobrepor o contador da carta. */
+    #letter .daisy-corner.one {
+      top: 16px;
+      right: 22px;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+    }
+
+    #counterBox {
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      border: 1px solid #f2ccdc;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff5f9, #ffe9f1);
+      text-align: center;
+      color: #88405f;
+      font-weight: 700;
+    }
+
+    #counter {
+      margin-top: 7px;
+      font-size: clamp(.95rem, 2.8vw, 1.08rem);
+      color: #a24d71;
+    }
+
+    .letter-title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #typing {
+      min-height: 360px;
+      white-space: pre-line;
+      color: #5f4651;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 3vw, 1.13rem);
+      line-height: 1.9;
+    }
+
+    .letter-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 26px;
+    }
+
+    /* Proposta */
+    .proposal-ring {
+      display: grid;
+      place-items: center;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fff, #ffe6f0);
+      box-shadow: 0 14px 35px rgba(171, 65, 107, .18);
+      font-size: 2.7rem;
+      animation: pulseRing 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.045); }
+    }
+
+    /* Final */
+    .accepted-card {
+      width: min(860px, 95vw);
+    }
+
+    .success-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #8a355a;
+      background: #ffe9f2;
+      font-weight: 800;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: min(360px, 90%);
+      margin: 28px auto 0;
+      padding: 10px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #fff, #ffddea);
+      box-shadow: 0 18px 45px rgba(125, 49, 81, .18);
+      transform: rotate(-1.2deg);
+    }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 19px;
+    }
+
+    .photo-caption {
+      margin-top: 10px;
+      color: #8f6b7a;
+      font-size: .9rem;
+    }
+
+    .heart {
+      position: fixed;
+      top: -40px;
+      z-index: 20;
+      pointer-events: none;
+      animation: fall linear forwards;
+      user-select: none;
+    }
+
+    .daisy-fall {
+      position: fixed;
+      top: -50px;
+      z-index: 19;
+      pointer-events: none;
+      animation: fallSpin linear forwards;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(115vh); opacity: .2; }
+    }
+
+    @keyframes fallSpin {
+      to { transform: translateY(115vh) rotate(560deg); opacity: .15; }
+    }
+
+    .burst {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 9999;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .tiny-hearts {
+      margin-top: 14px;
+      letter-spacing: .35em;
+      color: var(--pink-500);
+      font-size: .86rem;
+    }
+
+    @media (max-width: 620px) {
+      .card {
+        border-radius: 24px;
+        padding: 30px 22px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn:not(.noBtn) {
+        width: 100%;
+      }
+
+      #typing {
+        min-height: 430px;
+        line-height: 1.75;
+      }
+
+      .daisy-corner {
+        opacity: .82;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <audio id="music" loop preload="auto">
+    <source src="musica3.mp3" type="audio/mpeg" />
+  </audio>
 
-    <audio id="music" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <audio id="typingSound">
-        <source src="typewriter.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="s1" class="screen active">
-        <div class="card">
-            <h1>Oi, Juliana ❤️</h1><br>
-            <p>Antes de continuar... preciso saber uma coisa.</p><br>
-            <button class="primary" onclick="showScreen('s2')">Continuar</button>
-        </div>
+  <!-- 1 -->
+  <section id="s1" class="screen active" aria-labelledby="title1">
+    <div class="card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <span class="daisy-corner two" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="eyebrow">feito especialmente para você</div>
+        <h1 id="title1">Oi, Juliana 🤍</h1>
+        <p class="lead">
+          Eu preparei uma coisinha. É simples, mas foi feita com bastante carinho — e cada detalhe aqui tem um motivo.
+        </p>
+        <button class="btn primary" onclick="showScreen('s2')">Começar 🌼</button>
+        <div class="tiny-hearts">♥ ♥ ♥</div>
+      </div>
     </div>
+  </section>
 
-    <div id="s2" class="screen">
-        <div class="card">
-            <h1>Você está pronta para uma experiência importante?</h1><br>
-            <button class="primary" onclick="showScreen('s3')">Sim 😌</button>
-            <button id="n1" class="noBtn">Não 😐</button>
+  <!-- 2 -->
+  <section id="s2" class="screen" aria-labelledby="title2">
+    <div class="card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="eyebrow">primeira checagem</div>
+        <h2 id="title2">Paciente Juliana, está pronta?</h2>
+        <svg class="ecg" viewBox="0 0 600 90" role="img" aria-label="linha de batimento cardíaco">
+          <path d="M4 48 H145 L170 48 L194 18 L224 76 L254 30 L280 48 H596" />
+        </svg>
+        <p class="lead">Prometo que esse é um procedimento totalmente seguro. Talvez só acelere um pouquinho o coração.</p>
+        <div class="buttons">
+          <button class="btn primary" onclick="showScreen('s3')">Estou pronta 😌</button>
+          <button id="n1" class="btn secondary noBtn" type="button">Acho que não 😐</button>
         </div>
+        <p class="mini-note">Diagnóstico preliminar: curiosidade em níveis elevados.</p>
+      </div>
     </div>
+  </section>
 
-    <div id="s3" class="screen">
-        <div class="card">
-            <h1>Promete ler até o final?</h1><br>
-            <button class="primary" onclick="showScreen('s4')">Prometo ❤️</button>
-            <button id="n2" class="noBtn">Talvez 😏</button>
+  <!-- 3 -->
+  <section id="s3" class="screen" aria-labelledby="title3">
+    <div class="card">
+      <span class="daisy-corner two" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="eyebrow">segunda checagem</div>
+        <h2 id="title3">Promete ler até o final?</h2>
+        <p class="lead">Sem pular etapa, sem fechar a página e sem fingir que não ficou curiosa. Combinado?</p>
+        <div class="buttons">
+          <button class="btn primary" onclick="showScreen('s4')">Prometo 🤍</button>
+          <button id="n2" class="btn secondary noBtn" type="button">Talvez…</button>
         </div>
+      </div>
     </div>
+  </section>
 
-    <div id="s4" class="screen">
-        <div class="card">
-            <h1>Última pergunta...</h1><br>
-            <p>Você gosta de mim pelo menos um pouquinho?</p><br>
-            <button class="primary" onclick="startLetter()">Sim 🥰</button>
-            <button id="n3" class="noBtn">Não 🙄</button>
+  <!-- 4 -->
+  <section id="s4" class="screen" aria-labelledby="title4">
+    <div class="card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <span class="daisy-corner two" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="eyebrow">última antes da carta</div>
+        <h2 id="title4">Agora uma pergunta importante…</h2>
+        <p class="lead">Você gosta de mim pelo menos um pouquinho?</p>
+        <div class="buttons">
+          <button class="btn primary" onclick="startLetter()">Talvez bastante 🥰</button>
+          <button id="n3" class="btn secondary noBtn" type="button">Nem um pouco 🙄</button>
         </div>
+      </div>
     </div>
+  </section>
 
-    <div id="letter" class="screen">
-        <div class="card">
-            <div id="counterBox">
-                ❤️ Estamos criando memórias há:
-                <div id="counter"></div>
-            </div>
-            <div id="typing"></div>
-            <br>
-            <button class="primary" onclick="showScreen('proposal')">Continuar ❤️</button>
+  <!-- Carta -->
+  <section id="letter" class="screen" aria-labelledby="letterTitle">
+    <div class="card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div id="counterBox">
+          🤍 Estamos criando memórias há:
+          <div id="counter">calculando…</div>
         </div>
-    </div>
 
-    <div id="proposal" class="screen">
-        <div class="card">
-            <h1>Juliana ❤️</h1><br>
-            <p>Você me concederia a honra de ser seu parceiro, melhor amigo e namorado?</p><br>
-            <button class="primary" onclick="accept()">SIM ❤️</button>
-            <button id="finalNo" class="noBtn">NÃO 🤡</button>
+        <div class="letter-title">
+          <div class="eyebrow">para você</div>
+          <h2 id="letterTitle">Uma carta para a Juliana</h2>
         </div>
-    </div>
 
-    <div id="accepted" class="screen">
-        <div class="card">
-            <h1>❤️ Pedido aceito com sucesso ❤️</h1><br>
-            <p>
-                Status do relacionamento atualizado.<br><br>
-                Namorada encontrada.<br><br>
-                Parabéns, Juliana.<br>
-                Você desbloqueou um Nicolas.
-            </p>
-            <img src="foto.jpeg" alt="foto do casal">
+        <div id="typing" aria-live="polite"></div>
+
+        <div class="letter-actions">
+          <button id="letterContinue" class="btn primary" onclick="showScreen('proposal')" disabled>
+            Continuar 🤍
+          </button>
         </div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        const text = `Juliana,
+  <!-- Pedido -->
+  <section id="proposal" class="screen" aria-labelledby="proposalTitle">
+    <div class="card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <span class="daisy-corner two" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="proposal-ring" aria-hidden="true">🤍</div>
+        <div class="eyebrow">e chegamos aqui</div>
+        <h1 id="proposalTitle">Juliana…</h1>
+        <p class="lead">
+          Eu quero continuar construindo tudo isso ao seu lado. Quero ser seu parceiro, seu porto seguro, seu melhor amigo — e, oficialmente, seu namorado.
+        </p>
+        <h2>Quer namorar comigo?</h2>
+        <div class="buttons">
+          <button class="btn primary" onclick="accept()">SIM, eu quero! 🤍</button>
+          <button id="finalNo" class="btn secondary noBtn" type="button">Não 😶</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-meus dias têm ficado cada vez melhores desde que te conheci.
-Eu amei sua companhia, nossas conversas, os momentos simples e até os mais engraçados kkkkk.
-Confesso que você me pegou desprevenido com sua gentileza, sua personalidade contagiante, seus beijos e abraços.
-Quando me pego pensando nessas coisas, sinto que não quero deixar isso ir embora ou deixar escapar.
-Quero agarrar e não deixar mais ir.
-Um pedido oficial vai vir, mas não quero esperar para dizer que escolho você hoje.
-Escolho continuar te conhecendo, criando memórias, dando risada de coisas bobas e vivendo muitos momentos ao seu lado.
-Quero te mostrar que estou disposto a confiar em você e espero que esteja também a confiar em mim.
-Quero te mostrar que podemos dar certo e que esse é meu objetivo.
+  <!-- Final -->
+  <section id="accepted" class="screen" aria-labelledby="acceptedTitle">
+    <div class="card accepted-card">
+      <span class="daisy-corner one" aria-hidden="true">🌼</span>
+      <span class="daisy-corner two" aria-hidden="true">🌼</span>
+      <div class="content">
+        <div class="success-pill">✓ status de relacionamento atualizado com sucesso</div>
+        <h1 id="acceptedTitle">Agora é oficial, Juliana. 🤍</h1>
+        <p class="lead">
+          Namorada encontrada.<br />
+          Nicolas oficialmente apaixonado.<br /><br />
+          Que esse seja só o começo de muitas memórias, risadas, abraços, margaridas e dias maravilhosos juntos.
+        </p>
+
+        <div class="photo-frame">
+          <img src="foto.jpeg" alt="Foto de Nicolas e Juliana" />
+          <div class="photo-caption">meu lugar favorito começa a parecer muito com “ao seu lado”.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const letterText = `Juliana,
+
+Desde que você apareceu, os meus dias têm ficado mais leves e mais bonitos.
+Eu tenho gostado cada vez mais da sua companhia, das nossas conversas e de todos os momentos com você — desde os mais especiais até aqueles completamente bobos que fazem a gente rir sem motivo kkkkk.
+Você me pegou desprevenido com a sua gentileza, seu charme, seu jeito de ser, sua personalidade, seus olhos lindos, seu sorriso, seus beijos e seus abraços.
+E eu gosto de uma coisa especialmente bonita em você: você passa os seus dias cuidando de pessoas. Talvez por isso eu ache ainda mais especial poder dizer que eu também quero cuidar de você — não porque você precise, mas porque eu quero estar presente, somar, apoiar e fazer a vida ficar um pouquinho mais leve quando eu puder.
+A cada dia eu tenho mais certeza de que não quero deixar o que a gente está construindo simplesmente passar. Eu quero escolher isso. Escolher você.
+Quero continuar te conhecendo, criando memórias, dando risada de coisas bobas, vivendo momentos simples e comemorando os grandes.
+Quero construir uma relação baseada em confiança, parceria, carinho e sinceridade. Quero te mostrar, com atitudes, que a gente pode dar certo e que eu realmente quero fazer isso dar certo.
+
+Quero que você tenha certeza de uma coisa: quando os dias ficarem difíceis, eu quero respirar, ficar calmo e voltar para conversar com você. Não quero ir embora na primeira tempestade, nem deixar você sozinha no que importa. Quero escolher você todos os dias, cuidar do seu coração e ser alguém com quem você possa contar de verdade.
+
+E quero que você saiba que, para mim, não é sobre o quanto tem na conta, sobre quantos planos a gente precisa adiar ou sobre como a gente chega aos lugares. Se a vida trouxer algum imprevisto, eu quero atravessar isso ao seu lado — com parceria, leveza e a certeza de que ter você comigo já faz tudo valer a pena.
 
 Quero cuidar de você.
 Quero compartilhar experiências.
 Rir com você.
-Chorar com você.
-E fazer parte da sua vida.`;
+Chorar com você quando for preciso.
+Torcer por você.
+E fazer parte da sua vida.
 
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+Se eu pudesse transformar tudo isso em flores, provavelmente essa página estaria cheia de margaridas brancas.
+Mas, como sou programador, fiz o que sei fazer: transformei um sentimento em código.
+
+E ainda falta a parte mais importante.`;
+
+    const START_DATE = new Date('2026-09-18T00:00:00');
+    let typingStarted = false;
+    let fallingInterval = null;
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+      const next = document.getElementById(id);
+      next.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function placeRunawayButton(btn) {
+      const padding = 14;
+      const rect = btn.getBoundingClientRect();
+      const content = btn.closest('.content');
+      if (!content) return;
+
+      const maxX = Math.max(padding, content.clientWidth - rect.width - padding);
+      const maxY = Math.max(padding, content.clientHeight - rect.height - padding);
+
+      btn.classList.add('is-running');
+      btn.style.left = (padding + Math.random() * Math.max(1, maxX - padding)) + 'px';
+      btn.style.top = (padding + Math.random() * Math.max(1, maxY - padding)) + 'px';
+    }
+
+    function addRunawayEvents(btn, messages) {
+      let attempts = 0;
+      let lastAttemptAt = 0;
+
+      const flee = (event) => {
+        event.preventDefault();
+        const now = Date.now();
+
+        // Evita que o mesmo toque dispare touchstart e click como duas tentativas.
+        if (now - lastAttemptAt < 350) return;
+        lastAttemptAt = now;
+        attempts++;
+
+        if (attempts === 5) {
+          btn.style.display = 'none';
+          return;
         }
 
-        function move(btn) {
-            btn.addEventListener('mouseover', () => {
-                btn.style.left = Math.random() * (window.innerWidth - 180) + 'px';
-                btn.style.top = Math.random() * (window.innerHeight - 80) + 'px';
-            });
+        btn.textContent = messages[attempts - 1];
+        placeRunawayButton(btn);
+      };
+
+      btn.addEventListener('mouseenter', flee);
+      btn.addEventListener('touchstart', flee, { passive: false });
+      btn.addEventListener('click', flee);
+    }
+
+    // Botões das três etapas iniciais: cada um mantém seu próprio contador.
+    function setupCheckpointNoButtons() {
+      const messages = [
+        'Tem certeza? 😳',
+        'Resposta suspeita…',
+        'Essa opção está com erro',
+        'Tenta o outro botão 👀'
+      ];
+
+      ['n1', 'n2', 'n3'].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (btn) addRunawayEvents(btn, messages);
+      });
+    }
+
+    // O último botão tem mensagens próprias e não compartilha estado com os anteriores.
+    function setupFinalNoButton() {
+      const finalNo = document.getElementById('finalNo');
+      if (!finalNo) return;
+
+      addRunawayEvents(finalNo, [
+        'Juliana, olha o botão do SIM 🤍',
+        'O Nicolas está torcendo muito pelo SIM 🥹',
+        'Seu coração já sabe a resposta 👀',
+        'Esse botão prefere ver vocês dois juntos 🌼'
+      ]);
+    }
+
+    setupCheckpointNoButtons();
+    setupFinalNoButton();
+
+    function updateCounter() {
+      const now = new Date();
+      const diff = Math.max(0, now - START_DATE);
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      document.getElementById('counter').textContent =
+        `${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos`;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    function createFallingMagic() {
+      if (fallingInterval) return;
+
+      fallingInterval = setInterval(() => {
+        const item = document.createElement('div');
+        const isDaisy = Math.random() < 0.34;
+
+        item.className = isDaisy ? 'daisy-fall' : 'heart';
+        item.textContent = isDaisy ? '🌼' : (Math.random() < .65 ? '🤍' : '💗');
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.fontSize = (15 + Math.random() * 20) + 'px';
+        item.style.animationDuration = (5 + Math.random() * 4) + 's';
+        item.style.opacity = .45 + Math.random() * .4;
+
+        document.body.appendChild(item);
+        setTimeout(() => item.remove(), 9500);
+      }, 420);
+    }
+
+    async function startLetter() {
+      showScreen('letter');
+      createFallingMagic();
+
+      const music = document.getElementById('music');
+      music.volume = 0.12;
+      music.play().catch(() => {});
+
+      if (typingStarted) return;
+      typingStarted = true;
+
+      const target = document.getElementById('typing');
+      const continueButton = document.getElementById('letterContinue');
+      target.textContent = '';
+
+      let i = 0;
+
+      const timer = setInterval(() => {
+        const current = letterText[i];
+        target.textContent += current || '';
+
+        i++;
+
+        if (i >= letterText.length) {
+          clearInterval(timer);
+          continueButton.disabled = false;
+          continueButton.style.opacity = '1';
         }
-        ['n1', 'n2', 'n3'].forEach(id => move(document.getElementById(id)));
+      }, 28);
+    }
 
-        function updateCounter() {
-            const start = new Date('2026-09-18T00:00:00');
-            const now = new Date();
-            const diff = now - start;
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor(diff % 86400000 / 3600000);
-            const m = Math.floor(diff % 3600000 / 60000);
-            const s = Math.floor(diff % 60000 / 1000);
-            document.getElementById('counter').innerText = `${d} dias, ${h} horas, ${m} minutos e ${s} segundos`;
-        }
-        setInterval(updateCounter, 1000); updateCounter();
+    const letterContinue = document.getElementById('letterContinue');
+    letterContinue.style.opacity = '.5';
 
-        function hearts() {
-            setInterval(() => {
-                const h = document.createElement('div');
-                h.className = 'heart';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.fontSize = (15 + Math.random() * 25) + 'px';
-                h.style.animationDuration = (4 + Math.random() * 4) + 's';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 8000);
-            }, 250);
-        }
+    function celebrationBurst() {
+      const symbols = ['🤍', '💗', '🌼'];
+      const total = window.innerWidth < 600 ? 85 : 150;
 
-        function startLetter() {
-            showScreen('letter');
-            document.getElementById('music').play().catch(() => { });
-            const music = document.getElementById('music');
-            music.volume = 0.2;
-            hearts();
+      for (let i = 0; i < total; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'burst';
+        particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        particle.style.fontSize = (14 + Math.random() * 28) + 'px';
+        document.body.appendChild(particle);
 
-            let i = 0;
-            const target = document.getElementById('typing');
-            const sound = document.getElementById('typingSound');
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 150 + Math.random() * Math.min(650, window.innerWidth * .75);
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
 
-            const timer = setInterval(() => {
-                target.textContent += text[i];
+        particle.animate(
+          [
+            { transform: 'translate(-50%, -50%) scale(.2) rotate(0deg)', opacity: 1 },
+            { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.3) rotate(360deg)`, opacity: 0 }
+          ],
+          {
+            duration: 1600 + Math.random() * 1500,
+            easing: 'cubic-bezier(.17,.67,.32,1)',
+            fill: 'forwards'
+          }
+        );
 
-                if (text[i] && text[i] != " " && text[i] != "\n") {
-                    sound.currentTime = 1;
-                    sound.play().catch(() => { });
-                }
+        setTimeout(() => particle.remove(), 3300);
+      }
+    }
 
-                i++;
-                if (i >= text.length) clearInterval(timer);
-            }, 35);
-        }
+    function accept() {
+      celebrationBurst();
 
-        let tries = 0;
-        const msgs = ["Tem certeza?", "Resposta inválida", "Opção indisponível", "O desenvolvedor removeu esta função"];
-        const finalNo = document.getElementById('finalNo');
+      const music = document.getElementById('music');
+      music.volume = 0.34;
 
-        finalNo.addEventListener('mouseover', () => {
-            finalNo.style.left = Math.random() * (window.innerWidth - 220) + 'px';
-            finalNo.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-
-            if (tries < msgs.length) finalNo.innerText = msgs[tries];
-            tries++;
-
-            if (tries > 6) finalNo.style.display = 'none';
-        });
-
-        function heartExplosion() {
-
-            const totalHearts = 150;
-
-            for (let i = 0; i < totalHearts; i++) {
-
-                const heart = document.createElement('div');
-
-                heart.classList.add('heart-burst');
-
-                heart.innerHTML = '❤️';
-
-                const size = 15 + Math.random() * 35;
-
-                heart.style.fontSize = size + 'px';
-
-                document.body.appendChild(heart);
-
-                const angle = Math.random() * Math.PI * 2;
-
-                const distance = 200 + Math.random() * 600;
-
-                const x = Math.cos(angle) * distance;
-
-                const y = Math.sin(angle) * distance;
-
-                heart.animate(
-                    [
-                        {
-                            transform: 'translate(-50%, -50%) scale(0)',
-                            opacity: 1
-                        },
-                        {
-                            transform: `translate(${x}px, ${y}px) scale(1.5)`,
-                            opacity: 0
-                        }
-                    ],
-                    {
-                        duration: 2000 + Math.random() * 1500,
-                        easing: 'cubic-bezier(.17,.67,.42,1)',
-                        fill: 'forwards'
-                    });
-
-                setTimeout(() => {
-                    heart.remove();
-                }, 3500);
-            }
-        }
-
-        function heartExplosion() {
-
-            const totalHearts = 150;
-
-            for (let i = 0; i < totalHearts; i++) {
-
-                const heart = document.createElement('div');
-
-                heart.classList.add('heart-burst');
-
-                heart.innerHTML = '❤️';
-
-                const size = 15 + Math.random() * 35;
-
-                heart.style.fontSize = size + 'px';
-
-                document.body.appendChild(heart);
-
-                const angle = Math.random() * Math.PI * 2;
-
-                const distance = 200 + Math.random() * 600;
-
-                const x = Math.cos(angle) * distance;
-
-                const y = Math.sin(angle) * distance;
-
-                heart.animate(
-                    [
-                        {
-                            transform: 'translate(-50%, -50%) scale(0)',
-                            opacity: 1
-                        },
-                        {
-                            transform: `translate(${x}px, ${y}px) scale(1.5)`,
-                            opacity: 0
-                        }
-                    ],
-                    {
-                        duration: 2000 + Math.random() * 1500,
-                        easing: 'cubic-bezier(.17,.67,.42,1)',
-                        fill: 'forwards'
-                    });
-
-                setTimeout(() => {
-                    heart.remove();
-                }, 3500);
-            }
-        }
-
-        function accept() {
-
-            heartExplosion();
-
-            setTimeout(() => {
-
-                showScreen('accepted');
-
-                document.getElementById('photo').style.display = 'block';
-
-            }, 1000);
-
-        }
-    </script>
+      setTimeout(() => {
+        showScreen('accepted');
+      }, 850);
+    }
+  </script>
 </body>
-
 </html>
